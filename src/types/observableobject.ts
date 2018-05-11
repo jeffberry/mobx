@@ -72,7 +72,7 @@ export class ObservableObjectAdministration
     constructor(public target: any, public name: string, public defaultEnhancer: IEnhancer<any>) {}
 
     read(owner: any, key: string) {
-        if (this.target !== owner) {
+        if (this.target.$mobx !== owner.$mobx) {
             this.illegalAccess(owner, key)
             return
         }
@@ -81,7 +81,7 @@ export class ObservableObjectAdministration
 
     write(owner: any, key: string, newValue) {
         const instance = this.target
-        if (instance !== owner) {
+        if (instance.$mobx !== owner.$mobx) {
             this.illegalAccess(owner, key)
             return
         }
